@@ -11,15 +11,14 @@ public class SpiderNavigation : ModuleRules
             new string[] {
                 "Core",
                 "CoreUObject",
-                "Engine",
+                "Engine"
             });
 
         PublicDependencyModuleNames.AddRange(
 			new string[] {
 				"Core",
 				"CoreUObject",
-				"Engine",
-                "AIModule",
+				"Engine"
             });
 	}
 }
