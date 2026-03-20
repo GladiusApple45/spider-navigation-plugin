@@ -156,6 +156,7 @@ void ASpiderNavGridBuilder::RemoveTracersClosedInVolumes()
 {
 	FCollisionQueryParams RV_TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), false, this);
 	RV_TraceParams.bTraceComplex = false;
+	RV_TraceParams.bTraceAsyncScene = true;
 	RV_TraceParams.bReturnPhysicalMaterial = false;
 
 	//ignore all tracers
@@ -230,6 +231,7 @@ void ASpiderNavGridBuilder::TraceFromAllTracers()
 {
 	FCollisionQueryParams RV_TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), false, this);
 	RV_TraceParams.bTraceComplex = false;
+	RV_TraceParams.bTraceAsyncScene = true;
 	RV_TraceParams.bReturnPhysicalMaterial = false;
 
 	TArray<AActor*> ActorsToIgnore;
@@ -435,6 +437,7 @@ bool ASpiderNavGridBuilder::CheckNavPointsVisibility(ASpiderNavPoint* NavPoint1,
 
 	FCollisionQueryParams TraceQueryParams = FCollisionQueryParams(FName(TEXT("RV_Trace_NavPoints")), false, this);
 	TraceQueryParams.bTraceComplex = false;
+	TraceQueryParams.bTraceAsyncScene = true;
 	TraceQueryParams.bReturnPhysicalMaterial = false;
 	TraceQueryParams.AddIgnoredActor(NavPoint1);
 
@@ -474,6 +477,7 @@ bool ASpiderNavGridBuilder::CheckNavPointCanSeeLocation(ASpiderNavPoint* NavPoin
 
 	FCollisionQueryParams TraceQueryParams = FCollisionQueryParams(FName(TEXT("RV_Trace_Locations")), false, this);
 	TraceQueryParams.bTraceComplex = false;
+	TraceQueryParams.bTraceAsyncScene = true;
 	TraceQueryParams.bReturnPhysicalMaterial = false;
 	TraceQueryParams.AddIgnoredActor(NavPoint);
 
