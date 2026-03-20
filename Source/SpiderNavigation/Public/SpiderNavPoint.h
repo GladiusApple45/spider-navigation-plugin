@@ -20,28 +20,41 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "SpiderNavigationModule.h"
-#include "Modules/ModuleManager.h"
-#include "SpiderNavigationPrivate.h"
+#pragma once
 
-//////////////////////////////////////////////////////////////////////////
-// FSpiderNavigationModule
+#include "GameFramework/Actor.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
+#include "SpiderNavPoint.generated.h"
 
-class FSpiderNavigationModule : public ISpiderNavigationModuleInterface
+/** Actor for navigation point during navigation building */
+UCLASS()
+class ASpiderNavPoint : public AActor
 {
-public:
-	virtual void StartupModule() override
-	{
-		check(GConfig);		
-		UE_LOG(LogSpiderNavigation, Log, TEXT("Hi from Spider Navigation"))
-	}
+	GENERATED_BODY()
 
-	virtual void ShutdownModule() override
-	{
-	}
+public:	
+	// Sets default values for this actor's properties
+	ASpiderNavPoint();
+
+	/** Sphere collision component */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpiderGridBuilder")
+	class USphereComponent* CollisionComp;
+
+    /** Nearest navigation points which can be connected */
+	TArray<ASpiderNavPoint*> Neighbors;
+
+	/** Nearest navigation points which can be possible connected */
+	TArray<ASpiderNavPoint*> PossibleEdgeNeighbors;
+
+    /** Normal from nearest world object with collision */
+	FVector Normal;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 };
-
-//////////////////////////////////////////////////////////////////////////
-
-IMPLEMENT_MODULE(FSpiderNavigationModule, SpiderNavigation);
-DEFINE_LOG_CATEGORY(LogSpiderNavigation);

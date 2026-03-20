@@ -20,28 +20,16 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "SpiderNavigationModule.h"
-#include "Modules/ModuleManager.h"
-#include "SpiderNavigationPrivate.h"
+#pragma once
 
-//////////////////////////////////////////////////////////////////////////
-// FSpiderNavigationModule
+#include "SpiderNavPoint.h"
+#include "SpiderNavPointEdge.generated.h"
 
-class FSpiderNavigationModule : public ISpiderNavigationModuleInterface
+/**
+ *  Actor for navigation point on edge of objects. Using during grid building process.
+ */
+UCLASS()
+class ASpiderNavPointEdge : public ASpiderNavPoint
 {
-public:
-	virtual void StartupModule() override
-	{
-		check(GConfig);		
-		UE_LOG(LogSpiderNavigation, Log, TEXT("Hi from Spider Navigation"))
-	}
-
-	virtual void ShutdownModule() override
-	{
-	}
+	GENERATED_BODY()
 };
-
-//////////////////////////////////////////////////////////////////////////
-
-IMPLEMENT_MODULE(FSpiderNavigationModule, SpiderNavigation);
-DEFINE_LOG_CATEGORY(LogSpiderNavigation);

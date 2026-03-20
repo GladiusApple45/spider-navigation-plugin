@@ -1,32 +1,28 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
+	"Version": 4,
+	"VersionName": "1.2",
 	"FriendlyName": "SpiderNavigation",
-	"Description": "",
-	"Category": "Game Features",
-	"CreatedBy": "",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
+	"Description": "A custom navigation system suitable for spiders",
+	"Category": "Gameplay",
+	"CreatedBy": "Roman Nix",
+	"CreatedByURL": "http://me.getid.org/",
+	"DocsURL": "https://github.com/rnixik/spider-navigation-plugin",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/9061da2ec4df457dbce7c416381896d5",
 	"SupportURL": "",
-	"EnabledByDefault": false,
 	"CanContainContent": true,
 	"IsBetaVersion": false,
-	"IsExperimentalVersion": false,
 	"Installed": false,
+	"EngineVersion" : "5.4.0",
 	"Modules": [
 		{
 			"Name": "SpiderNavigation",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
-		},
-		{
-			"name": "SpiderNavigation_Editor",
-			"type": "Editor",
-			"loadingPhase": "PostEngineInit"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Mac"
+			]
 		}
-	],
-	"ExplicitlyLoaded": true,
-	"BuiltInInitialFeatureState": "Active"
+	]
 }

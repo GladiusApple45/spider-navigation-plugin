@@ -20,28 +20,34 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
+#include "SpiderNavGridTracer.h"
 #include "SpiderNavigationModule.h"
-#include "Modules/ModuleManager.h"
-#include "SpiderNavigationPrivate.h"
 
-//////////////////////////////////////////////////////////////////////////
-// FSpiderNavigationModule
-
-class FSpiderNavigationModule : public ISpiderNavigationModuleInterface
+// Sets default values
+ASpiderNavGridTracer::ASpiderNavGridTracer()
 {
-public:
-	virtual void StartupModule() override
-	{
-		check(GConfig);		
-		UE_LOG(LogSpiderNavigation, Log, TEXT("Hi from Spider Navigation"))
-	}
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
 
-	virtual void ShutdownModule() override
-	{
-	}
-};
+	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Collision Sphere"));
+	CollisionComp->SetCollisionObjectType(ECC_WorldStatic);
+	CollisionComp->BodyInstance.SetCollisionProfileName("Custom");
+	CollisionComp->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	CollisionComp->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+	CollisionComp->BodyInstance.SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics, true);
+	CollisionComp->SetSphereRadius(10.f);
+	RootComponent = CollisionComp;
 
-//////////////////////////////////////////////////////////////////////////
+}
 
-IMPLEMENT_MODULE(FSpiderNavigationModule, SpiderNavigation);
-DEFINE_LOG_CATEGORY(LogSpiderNavigation);
+// Called when the game starts or when spawned
+void ASpiderNavGridTracer::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+// Called every frame
+void ASpiderNavGridTracer::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}

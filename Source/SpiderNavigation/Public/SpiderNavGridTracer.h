@@ -20,28 +20,37 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-#include "SpiderNavigationModule.h"
-#include "Modules/ModuleManager.h"
-#include "SpiderNavigationPrivate.h"
+#pragma once
 
-//////////////////////////////////////////////////////////////////////////
-// FSpiderNavigationModule
+#include "GameFramework/Actor.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
+#include "SpiderNavGridTracer.generated.h"
 
-class FSpiderNavigationModule : public ISpiderNavigationModuleInterface
+/** Actor which traces for world objects with collisions */
+UCLASS()
+class ASpiderNavGridTracer : public AActor
 {
-public:
-	virtual void StartupModule() override
-	{
-		check(GConfig);		
-		UE_LOG(LogSpiderNavigation, Log, TEXT("Hi from Spider Navigation"))
-	}
+	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	ASpiderNavGridTracer();
 
-	virtual void ShutdownModule() override
-	{
-	}
+	/** Sphere collision component */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpiderNavGridBuilder")
+	class USphereComponent* CollisionComp;
+
+
+	
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	
+	
 };
-
-//////////////////////////////////////////////////////////////////////////
-
-IMPLEMENT_MODULE(FSpiderNavigationModule, SpiderNavigation);
-DEFINE_LOG_CATEGORY(LogSpiderNavigation);
