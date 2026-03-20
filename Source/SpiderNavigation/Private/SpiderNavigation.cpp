@@ -176,7 +176,7 @@ TArray<FSpiderNavNode*> ASpiderNavigation::FindNodesPath(FSpiderNavNode* StartNo
 
 
 	//Finding closest to end
-	float IterMin = 99999999999.0f;
+	float IterMin = MAX_FLT;
 	for (FSpiderNavNode* IterNode : ClosedList) {
 		if (IterNode->F < IterMin) {
 			IterMin = IterNode->F;
@@ -199,7 +199,7 @@ TArray<FSpiderNavNode*> ASpiderNavigation::FindNodesPath(FSpiderNavNode* StartNo
 
 FSpiderNavNode* ASpiderNavigation::GetFromOpenList()
 {
-	float MinF = 9999999999.0f;
+	float MinF = MAX_FLT;
 	FSpiderNavNode* MinNode = NULL;
 	for (FSpiderNavNode* Node : OpenList) {
 		if (Node->F < MinF) {
@@ -217,7 +217,7 @@ FSpiderNavNode* ASpiderNavigation::GetFromOpenList()
 FSpiderNavNode* ASpiderNavigation::FindClosestNode(FVector Location)
 {
 	FSpiderNavNode* ClosestNode = nullptr;
-	float MinDistance = 999999999;
+	float MinDistance = MAX_FLT;
 	for (int32 i = 0; i != NavNodes.Num(); i++) {
 		float Distance = (NavNodes[i].Location - Location).Size();
 		if (Distance < MinDistance) {
